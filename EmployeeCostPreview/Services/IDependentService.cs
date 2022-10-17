@@ -2,6 +2,9 @@
 
 namespace EmployeeCostPreview.Services
 {
+    /// <summary>
+    /// Interface defining operations on dependent records
+    /// </summary>
     public interface IDependentService
     {
         Task<ServiceResponse<GetDependentDto>> GetById(int id);

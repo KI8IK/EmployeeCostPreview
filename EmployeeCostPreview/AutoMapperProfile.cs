@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
 using EmployeeCostPreview.Dtos.Dependent;
 using EmployeeCostPreview.Dtos.Employee;
-using System.Reflection.PortableExecutable;
 
 namespace EmployeeCostPreview
 {
+    /// <summary>
+    /// Mapping definitions which define the property conversions between
+    /// models and DTOs.
+    /// </summary>
     public class AutoMapperProfile : Profile
     {
-        /// <summary>
-        /// The default employee pay rate an employee receives if one is not provided
-        /// during the employee POST operation.
-        /// </summary>
-        public const decimal _defaultPayRate = 2000.00m;
 
         public AutoMapperProfile()
         {
@@ -20,7 +18,7 @@ namespace EmployeeCostPreview
             // When mapping the AddEmployeeDto to an Employee, inject the
             // default employee pay rate if a pay rate was not defined.
             CreateMap<AddEmployeeDto, Employee>()
-                .ForMember(dest => dest.PayRate, opt => opt.NullSubstitute(_defaultPayRate))
+                .ForMember(dest => dest.PayRate, opt => opt.NullSubstitute(Constants.DefaultEmployeePayRate))
                 .ForMember(dest => dest.Dependents, opt => opt.MapFrom(src => src.Dependents));
 
             // When mapping the UpdateEmployeeDto to an Employee, only map

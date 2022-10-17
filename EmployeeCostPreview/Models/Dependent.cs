@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EmployeeCostPreview.Models
 {
     /// <summary>
-    /// Dependent of an Employee
+    /// Dependent schema model
     /// </summary>
     public class Dependent
     {

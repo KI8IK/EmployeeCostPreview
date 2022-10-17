@@ -6,14 +6,12 @@ using Microsoft.EntityFrameworkCore;
 namespace EmployeeCostPreview.Services
 {
     /// <summary>
-    /// CRUD for Dependent objects
+    /// CRUD services for Dependent records
     /// </summary>
     public class DependentService : IDependentService
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-
-        public const string DependentNotFoundMessage = "Dependent not found.";
 
         public DependentService(IMapper mapper, DataContext context)
         {
@@ -21,6 +19,11 @@ namespace EmployeeCostPreview.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Add a new dependent to the repository
+        /// </summary>
+        /// <param name="newEmployee">Dependent DTO</param>
+        /// <returns>List of all dependent records</returns>
         async Task<ServiceResponse<List<GetDependentDto>>> IDependentService.AddDependent(AddDependentDto newDependent)
         {
             var serviceResponse = new ServiceResponse<List<GetDependentDto>>();
@@ -45,6 +48,10 @@ namespace EmployeeCostPreview.Services
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Retrieve all dependent records from the repository
+        /// </summary>
+        /// <returns>Collection of all dependent records</returns>
         async Task<ServiceResponse<List<GetDependentDto>>> IDependentService.GetAll()
         {
             var serviceResponse = new ServiceResponse<List<GetDependentDto>>();
@@ -53,6 +60,11 @@ namespace EmployeeCostPreview.Services
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Retrieve a specific dependent from the repository
+        /// </summary>
+        /// <param name="id">Primary key of the dependent record</param>
+        /// <returns>Request dependent record, if it exists</returns>
         async Task<ServiceResponse<GetDependentDto>> IDependentService.GetById(int id)
         {
             var serviceResponse = new ServiceResponse<GetDependentDto>();
@@ -64,12 +76,17 @@ namespace EmployeeCostPreview.Services
             catch (InvalidOperationException ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = DependentNotFoundMessage;
+                serviceResponse.Message = Constants.S_Error_DependentNotFoundMessage;
                 serviceResponse.Error = $"{ex.GetType()} - A dependent with an id of '{id}' could not be found.";
             }
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Update an existing repository dependent record
+        /// </summary>
+        /// <param name="updateEmployee">Dependent record with changes</param>
+        /// <returns>The updated dependent record</returns>
         async Task<ServiceResponse<GetDependentDto>> IDependentService.UpdateDependent(UpdateDependentDto updateDependent)
         {
             var serviceResponse = new ServiceResponse<GetDependentDto>();
@@ -83,7 +100,7 @@ namespace EmployeeCostPreview.Services
             catch (InvalidOperationException ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = DependentNotFoundMessage;
+                serviceResponse.Message = Constants.S_Error_DependentNotFoundMessage;
                 serviceResponse.Error = $"{ex.GetType()} - A dependent with an id of '{updateDependent.Id}' could not be found.";
             }
             catch (Exception ex)
@@ -100,6 +117,11 @@ namespace EmployeeCostPreview.Services
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Removes a specific dependent record from the repository
+        /// </summary>
+        /// <param name="id">Primary key of the dependent record</param>
+        /// <returns>A list of the dependent records remaining in the repository</returns>
         async Task<ServiceResponse<List<GetDependentDto>>> IDependentService.DeleteDependent(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetDependentDto>>();
@@ -113,7 +135,7 @@ namespace EmployeeCostPreview.Services
             catch (InvalidOperationException ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = DependentNotFoundMessage;
+                serviceResponse.Message = Constants.S_Error_DependentNotFoundMessage;
                 serviceResponse.Error = $"{ex.GetType()} - A dependent with an id of '{id}' could not be found.";
             }
             catch (Exception ex)

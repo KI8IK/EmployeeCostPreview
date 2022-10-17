@@ -10,10 +10,24 @@ namespace EmployeeCostPreview.Dtos.Employee
     public class UpdateEmployeeDto
     {
         [Required]
+        /// <summary>
+        /// Employee id - Required
+        /// </summary>
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public decimal? PayRate { get; set; }
 
+        /// <summary>
+        /// Updated employee first name - Optional
+        /// </summary>
+        public string? FirstName { get; set; }
+
+        /// <summary>
+        /// Updated employee last name - Optional
+        /// </summary>
+        public string? LastName { get; set; }
+
+        /// <summary>
+        /// Updated employee pay rate - Optional
+        /// </summary>
+        public decimal? PayRate { get; set; }
     }
 }

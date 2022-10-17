@@ -6,14 +6,12 @@ using Microsoft.EntityFrameworkCore;
 namespace EmployeeCostPreview.Services
 {
     /// <summary>
-    /// CRUD for Employee objects
+    /// CRUD services for Employee records
     /// </summary>
     public class EmployeeService : IEmployeeService
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-
-        public const string EmployeeNotFoundMessage = "Employee not found.";
 
         public EmployeeService(IMapper mapper, DataContext context)
         {
@@ -21,6 +19,11 @@ namespace EmployeeCostPreview.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Add a new employee to the repository
+        /// </summary>
+        /// <param name="newEmployee">Employee DTO</param>
+        /// <returns>List of all employee records</returns>
         async Task<ServiceResponse<List<GetEmployeeDto>>> IEmployeeService.AddEmployee(AddEmployeeDto newEmployee)
         {
             var serviceResponse = new ServiceResponse<List<GetEmployeeDto>>();
@@ -48,6 +51,10 @@ namespace EmployeeCostPreview.Services
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Retrieve all employee records from the repository
+        /// </summary>
+        /// <returns>Collection of all employee records</returns>
         async Task<ServiceResponse<List<GetEmployeeDto>>> IEmployeeService.GetAll()
         {
             var serviceResponse = new ServiceResponse<List<GetEmployeeDto>>();
@@ -58,6 +65,11 @@ namespace EmployeeCostPreview.Services
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Retrieve a specific employee from the repository
+        /// </summary>
+        /// <param name="id">Primary key of the employee record</param>
+        /// <returns>Request employee record, if it exists</returns>
         async Task<ServiceResponse<GetEmployeeDto>> IEmployeeService.GetById(int id)
         {
             var serviceResponse = new ServiceResponse<GetEmployeeDto>();
@@ -72,12 +84,17 @@ namespace EmployeeCostPreview.Services
             catch (InvalidOperationException ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = EmployeeNotFoundMessage;
+                serviceResponse.Message = Constants.S_Error_EmployeeNotFoundMessage;
                 serviceResponse.Error = $"{ex.GetType()} - An employee with an id of '{id}' could not be found.";
             }
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Update an existing repository employee record
+        /// </summary>
+        /// <param name="updateEmployee">Employee record with changes</param>
+        /// <returns>The updated employee record</returns>
         async Task<ServiceResponse<GetEmployeeDto>> IEmployeeService.UpdateEmployee(UpdateEmployeeDto updateEmployee)
         {
             var serviceResponse = new ServiceResponse<GetEmployeeDto>();
@@ -94,7 +111,7 @@ namespace EmployeeCostPreview.Services
             catch (InvalidOperationException ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = EmployeeNotFoundMessage;
+                serviceResponse.Message = Constants.S_Error_EmployeeNotFoundMessage;
                 serviceResponse.Error = $"{ex.GetType()} - An employee with an id of '{updateEmployee.Id}' could not be found.";
             }
             catch (Exception ex)
@@ -111,6 +128,11 @@ namespace EmployeeCostPreview.Services
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Removes a specific employee record from the repository
+        /// </summary>
+        /// <param name="id">Primary key of the employee record</param>
+        /// <returns>A list of the employee records remaining in the repository</returns>
         async Task<ServiceResponse<List<GetEmployeeDto>>> IEmployeeService.DeleteEmployee(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetEmployeeDto>>();
@@ -124,7 +146,7 @@ namespace EmployeeCostPreview.Services
             catch (InvalidOperationException ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = EmployeeNotFoundMessage;
+                serviceResponse.Message = Constants.S_Error_EmployeeNotFoundMessage;
                 serviceResponse.Error = $"{ex.GetType()} - An employee with an id of '{id}' could not be found.";
             }
             catch (Exception ex)

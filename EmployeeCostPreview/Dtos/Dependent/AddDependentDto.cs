@@ -1,6 +1,4 @@
-﻿using EmployeeCostPreview.Dtos.Employee;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeCostPreview.Dtos.Dependent
 {
@@ -12,13 +10,13 @@ namespace EmployeeCostPreview.Dtos.Dependent
         /// <summary>
         /// Dependent first name
         /// </summary>
-        [Required(ErrorMessage = "A first name is requied"), MaxLength(50)]
+        [Required(ErrorMessage = Constants.S_Error_FirstNameRequired), MaxLength(50)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Dependent last name
         /// </summary>
-        [Required(ErrorMessage = "A last name is requied"), MaxLength(50)]
+        [Required(ErrorMessage = Constants.S_Error_LastNameRequired), MaxLength(50)]
         public string LastName { get; set; }
     }
 }

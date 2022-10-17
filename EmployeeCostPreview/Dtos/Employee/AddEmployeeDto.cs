@@ -11,13 +11,13 @@ namespace EmployeeCostPreview.Dtos.Employee
         /// <summary>
         /// Employee first name
         /// </summary>
-        [Required(ErrorMessage = "A first name is requied"), MaxLength(50)]
+        [Required(ErrorMessage = Constants.S_Error_FirstNameRequired), MaxLength(50)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Employee last name
         /// </summary>
-        [Required(ErrorMessage = "A last name is requied"), MaxLength(50)]
+        [Required(ErrorMessage = Constants.S_Error_LastNameRequired), MaxLength(50)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace EmployeeCostPreview.Dtos.Employee
         /// <summary>
         /// Collection of related dependents
         /// </summary>
-        public ICollection<AddDependentDto> Dependents { get; set; }
+        public ICollection<AddDependentDto>? Dependents { get; set; }
 
     }
 }

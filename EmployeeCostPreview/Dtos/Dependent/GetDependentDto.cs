@@ -1,6 +1,4 @@
-﻿using EmployeeCostPreview.Dtos.Employee;
-using System.ComponentModel.DataAnnotations.Schema;
-
+﻿
 namespace EmployeeCostPreview.Dtos.Dependent
 {
     /// <summary>
